@@ -571,6 +571,14 @@ footer {
 
   <form class="booking-form" id="bookingForm">
     <div class="form-row">
+      <label class="form-label" for="f-name" data-i18n-form="name">Your Name</label>
+      <input class="form-input" id="f-name" type="text" placeholder="e.g. Sarah Johnson" autocomplete="off">
+    </div>
+    <div class="form-row">
+      <label class="form-label" for="f-email" data-i18n-form="email">Email Address</label>
+      <input class="form-input" id="f-email" type="email" placeholder="e.g. sarah@email.com" autocomplete="off">
+    </div>
+    <div class="form-row">
       <label class="form-label" for="f-date" data-i18n-form="date">Preferred Date(s)</label>
       <input class="form-input" id="f-date" type="text" placeholder="e.g. November 15, or flexible in late November" autocomplete="off">
     </div>
@@ -596,6 +604,8 @@ footer {
 <script>
 document.getElementById('bookingForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  var name   = document.getElementById('f-name').value.trim();
+  var email  = document.getElementById('f-email').value.trim();
   var date   = document.getElementById('f-date').value.trim();
   var guests = document.getElementById('f-guests').value.trim();
   var notes  = document.getElementById('f-notes').value.trim();
@@ -603,11 +613,12 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
   var body =
     'Hello,\n\n' +
     'I would like to inquire about reserving a spot at The Local Table Japan.\n\n' +
-    '—\n' +
+    'Name:              ' + (name   || '—') + '\n' +
+    'Email:             ' + (email  || '—') + '\n' +
     'Preferred Date(s): ' + (date   || '—') + '\n' +
     'Number of Guests:  ' + (guests || '—') + '\n' +
     'Special Requests:  ' + (notes  || 'None') + '\n' +
-    '—\n\n' +
+    '\n' +
     'Looking forward to hearing from you.\n';
 
   var subject = 'Class Reservation Inquiry — The Local Table Japan';
@@ -863,6 +874,8 @@ function applyLang(lang) {
   var formT = {
     en: {
       name: 'Full Name',
+      email: 'Email Address',
+      name: 'Your Name',
       email: 'Email Address',
       date: 'Preferred Date(s)',
       guests: 'Number of Guests',
